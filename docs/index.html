@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Tempus</title>
+	<meta name="description" content="An online alarm clock.">
+	<meta name="author" content="Jonathan Sharman">
+
+	<link rel="stylesheet" href="style.css">
+	<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+	<script src="scripts/noSleep.js"></script>
+</head>
+
+<body>
+	<div id="militaryContainer">
+		<input id="military" type="checkbox" onchange="toggleMilitary(this)" checked>
+		<label for="military">24-hour time</label>
+	</div>
+	<div id="hoursMinutesContainer">
+		<table id="hours">
+			<caption>Hours</caption>
+			<tbody></tbody>
+		</table>
+		<table id="minutes">
+			<caption>Minutes</caption>
+			<tbody></tbody>
+		</table>
+	</div>
+	<div id="timesContainer">
+		<span id="currentTime">--:--:--</span>
+		<span id="alarmTime">OFF</span>
+		<span id="timeLeft">--:--:--</span>
+	</div>
+	<div class="centered">
+		<button id="snooze" type="button">Snooze</button>
+	</div>
+	<div class="centered">
+		<button id="stop" type="button">Stop</button>
+	</div>
+	<div id="footer">
+		<span>Created by <a href="https://www.jonathansharman.com" target="_blank">Jonathan Sharman</a>.</span>
+		<img id="logo" src="logo.svg" width="96" height="96" alt="logo">
+	</div>
+</body>
+
+<script src="scripts/main.js"></script>
+
+</html>
