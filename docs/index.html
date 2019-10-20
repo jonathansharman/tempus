@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Tempus</title>
+	<title>Tempus: Online Alarm Clock</title>
 	<meta name="description" content="An online alarm clock.">
 	<meta name="author" content="Jonathan Sharman">
 
@@ -14,11 +14,11 @@
 </head>
 
 <body>
-	<div id="militaryContainer">
+	<div id="military-container">
 		<input id="military" type="checkbox" onchange="toggleMilitary(this)" checked>
 		<label for="military">24-hour time</label>
 	</div>
-	<div id="hoursMinutesContainer">
+	<div id="hours-minutes-container">
 		<table id="hours">
 			<caption>Hours</caption>
 			<tbody></tbody>
@@ -29,19 +29,15 @@
 		</table>
 	</div>
 	<div class="flex-container">
-		<span id="alarmTime"></span>
+		<span id="alarm-time"></span>
 	</div>
 	<div class="flex-container">
-		<span id="currentTime"></span>
-		<span>
-			<div class="flex-container">
-				<button id="snooze" type="button" disabled>Snooze</button>
-			</div>
-			<div class="flex-container">
-				<button id="stop" type="button" disabled>Stop</button>
-			</div>
-		</span>
-		<span id="timeLeft">--:--:--</span>
+		<span id="current-time"></span>
+		<button id="snooze" type="button" onclick="stop()" disabled>Snooze</button>
+		<span id="time-left"></span>
+	</div>
+	<div class="flex-container">
+		<button id="stop" type="button" disabled>Stop</button>
 	</div>
 	<div id="footer">
 		<div>Created by <a href="https://www.jonathansharman.com" target="_blank">Jonathan Sharman</a>.</div>

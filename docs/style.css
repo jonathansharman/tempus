@@ -17,9 +17,23 @@ body {
 	visibility: hidden;
 }
 
-/* Hours and minutes container */
+/* 24-hour time checkbox */
 
-#hoursMinutesContainer {
+#military-container {
+	float: right;
+}
+#military-container > input {
+	width: 12pt;
+	height: 12pt;
+}
+#military-container > label {
+	font-size: 22pt;
+	user-select: none;
+}
+
+/* Alarm hours and minutes UI */
+
+#hours-minutes-container {
 	clear: right;
 	display: flex;
 	vertical-align: bottom;
@@ -33,45 +47,41 @@ body {
 #hours {
 	margin-right: 15pt;
 }
-td {
-	padding-right: 5pt;
-}
 caption {
 	text-align: left;
+}
+.time {
+	user-select: none;
+	padding-left: 4pt;
+	padding-right: 4pt;
+}
+.time.selected {
+	color: #000;
+	background-color: #a0a0a0;
+}
+.time:hover {
+	color: #000;
+	background-color: #ccc;
 }
 
 /* Times */
 
-#alarmTime {
+#alarm-time {
 	font-size: 128pt;
 	text-align: center;
 	align-self: baseline;
 }
-#currentTime {
+#current-time {
 	flex: 1;
 	font-size: 40pt;
 	text-align: left;
 	align-self: baseline;
 }
-#timeLeft {
+#time-left {
 	flex: 1;
 	font-size: 40pt;
 	text-align: right;
 	align-self: baseline;
-}
-
-/* 24-hour time checkbox */
-
-#militaryContainer {
-	float: right;
-}
-#militaryContainer > input {
-	width: 12pt;
-	height: 12pt;
-}
-#militaryContainer > label {
-	font-size: 22pt;
-	user-select: none;
 }
 
 /* Buttons */
