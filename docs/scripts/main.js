@@ -221,9 +221,9 @@ function turnOffAlarm() {
 function snooze() {
 	let newAlarmM = alarmM + snoozeM;
 	let newAlarmH = alarmH;
-	if (alarmM >= 60) {
-		alarmM -= 60;
-		alarmH = (alarmH + 1) % 24;
+	if (newAlarmM >= 60) {
+		newAlarmM -= 60;
+		newAlarmH = (newAlarmH + 1) % 24;
 	}
 	setAlarmM(newAlarmM);
 	setAlarmH(newAlarmH);
