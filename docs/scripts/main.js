@@ -10,9 +10,11 @@ document.addEventListener('click', function enableNoSleep() {
 let military = null;
 
 let alarmHour = null;
-let alarmMinute = 0;
+let alarmMinTens = 0;
+let alarmMinOnes = 0;
 let currentHour = null;
 let currentMinute = null;
+let currentSecond = null;
 
 const hoursTable = document.getElementById("hours").tBodies[0];
 const minutesTable = document.getElementById("minutes").tBodies[0];
@@ -41,18 +43,7 @@ function makeHoursTable() {
 			if (alarmHour === hour) {
 				cell.className += " selected";
 			}
-			cell.onclick = function() {
-				if (alarmHour != null) {
-					// Deselect the previously selected hour cell.
-					document.getElementById("h" + alarmHour).className = "time hour";
-				}
-				// Set the new alarm hour.
-				alarmHour = hour;
-				// Select the new hour cell.
-				document.getElementById("h" + alarmHour).className = "time hour selected";
-				// Update display.
-				updateAlarmTime();
-			};
+			cell.onclick = function() { setAlarmHour(hour); };
 		}
 		if (!military) {
 			// Add am/pm to the beginning and end of the rows under 12-hour time.
@@ -65,28 +56,29 @@ function makeHoursTable() {
 
 function makeMinutesTable() {
 	minutesTable.innerHTML = "";
-	// Get digits of current minute setting.
-	let alarmOnesDigit = alarmMinute && alarmMinute % 10;
-	let alarmTensDigit = alarmMinute && (currentMinute - alarmOnesDigit) / 10;
 	// Make tens place row.
 	let tens = minutesTable.insertRow(0);
 	for (let colIdx = 0; colIdx < 6; ++colIdx) {
 		const cell = tens.insertCell(colIdx);
 		cell.innerHTML = colIdx;
+		cell.id = "mt" + colIdx;
 		cell.className = "time min-tens";
-		if (alarmTensDigit === colIdx) {
+		if (alarmMinTens === colIdx) {
 			cell.className += " selected";
 		}
+		cell.onclick = function() { setAlarmMinTens(colIdx); };
 	}
 	// Make ones place row.
 	const ones = minutesTable.insertRow(1);
 	for (let colIdx = 0; colIdx < 10; ++colIdx) {
 		const cell = ones.insertCell(colIdx);
 		cell.innerHTML = colIdx;
+		cell.id = "mo" + colIdx;
 		cell.className = "time min-ones";
-		if (alarmOnesDigit === colIdx) {
+		if (alarmMinOnes === colIdx) {
 			cell.className += " selected";
 		}
+		cell.onclick = function() { setAlarmMinOnes(colIdx); };
 	}
 }
 
@@ -104,10 +96,10 @@ function timeString(hour, minute, second = null) {
 	return result;
 }
 
-// Updates the alarm time display based on the values of alarmHour and alarmMinute.
+// Updates the alarm time display based on current alarm values.
 function updateAlarmTime() {
 	if (alarmHour != null) {
-		var alarmTimeText = timeString(alarmHour, alarmMinute);
+		var alarmTimeText = timeString(alarmHour, 10 * alarmMinTens + alarmMinOnes);
 		snoozeButton.disabled = false;
 		stopButton.disabled = false;
 	} else {
@@ -118,17 +110,56 @@ function updateAlarmTime() {
 	document.getElementById("alarm-time").innerHTML = alarmTimeText;
 }
 
-// Updates current time and time left.
+function setAlarmHour(value) {
+	if (alarmHour != null) {
+		// Deselect the previously selected cell.
+		document.getElementById("h" + alarmHour).className = "time hour";
+	}
+	alarmHour = value;
+	// Select the new cell, if any.
+	if (alarmHour != null) {
+		document.getElementById("h" + alarmHour).className = "time hour selected";
+	}
+	// Update display.
+	updateAlarmTime();
+	updateTimeLeft();
+}
+
+function setAlarmMinTens(value) {
+	// Deselect the previously selected cell.
+	document.getElementById("mt" + alarmMinTens).className = "time min-tens";
+	alarmMinTens = value;
+	// Select the new cell.
+	document.getElementById("mt" + alarmMinTens).className = "time min-tens selected";
+	// Update display.
+	updateAlarmTime();
+	updateTimeLeft();
+}
+
+function setAlarmMinOnes(value) {
+	// Deselect the previously selected cell.
+	document.getElementById("mo" + alarmMinOnes).className = "time min-tens";
+	alarmMinOnes = value;
+	// Select the new cell, if any.
+	document.getElementById("mo" + alarmMinOnes).className = "time min-tens selected";
+	// Update display.
+	updateAlarmTime();
+	updateTimeLeft();
+}
+
 function updateCurrentTime() {
 	const date = new Date();
 	currentHour = date.getHours();
 	currentMinute = date.getMinutes();
-	const second = date.getSeconds();
-	document.getElementById("current-time").innerHTML = timeString(currentHour, currentMinute, second);
-	// Update time left.
+	currentSecond = date.getSeconds();
+	document.getElementById("current-time").innerHTML = timeString(currentHour, currentMinute, currentSecond);
+	updateTimeLeft();
+};
+
+function updateTimeLeft() {
 	let hoursLeft = alarmHour - currentHour;
-	let minutesLeft = alarmMinute - currentMinute - (second == 0 ? 0 : 1);
-	const secondsLeft = (60 - second) % 60;
+	let minutesLeft = 10 * alarmMinTens + alarmMinOnes - currentMinute - (currentSecond == 0 ? 0 : 1);
+	const secondsLeft = (60 - currentSecond) % 60;
 	if (minutesLeft < 0) {
 		minutesLeft += 60;
 		--hoursLeft;
@@ -137,7 +168,7 @@ function updateCurrentTime() {
 		hoursLeft += 24;
 	}
 	document.getElementById("time-left").innerHTML = "-" + twoDigit(hoursLeft) + ":" + twoDigit(minutesLeft) + ":" + twoDigit(secondsLeft);
-};
+}
 
 // Sets the military time setting and updates all the elements accordingly.
 function setMilitary(value) {
@@ -168,6 +199,12 @@ function toggleMilitary(checkbox) {
 	setMilitary(checkbox.checked);
 }
 
+function snooze() {
+	alert("SNOOZE");
+}
+
 function stop() {
-	alert("STOP");
+	setAlarmHour(null);
+	setAlarmMinTens(0);
+	setAlarmMinOnes(0);
 }

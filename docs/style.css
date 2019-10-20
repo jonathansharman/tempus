@@ -110,7 +110,7 @@ button {
 #stop:hover {
 	background-color: #c05050;
 }
-button:disabled {
+#snooze:disabled, #stop:disabled {
 	background-color: #303030;
 }
 
