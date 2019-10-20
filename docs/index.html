@@ -14,11 +14,13 @@
 </head>
 
 <body>
+	<audio id="alarm-sound" src="alarm.wav" preload>Your browser does not support HTML5 audio!</audio>
+
 	<div id="military-container">
 		<input id="military" type="checkbox" onchange="toggleMilitary(this)" checked>
 		<label for="military">24-hour time</label>
 	</div>
-	<div id="hours-minutes-container">
+	<div id="h-m-container">
 		<table id="hours">
 			<caption>Hours</caption>
 			<tbody></tbody>
@@ -32,7 +34,7 @@
 		<span id="alarm-time"></span>
 	</div>
 	<div class="flex-container">
-		<span id="current-time"></span>
+		<span id="cur-time"></span>
 		<button id="snooze" type="button" onclick="snooze()" disabled>Snooze</button>
 		<span id="time-left"></span>
 	</div>

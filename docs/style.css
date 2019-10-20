@@ -33,10 +33,10 @@ body {
 
 /* Alarm hours and minutes UI */
 
-#hours-minutes-container {
+#h-m-container {
 	clear: right;
 	display: flex;
-	vertical-align: bottom;
+	justify-content: space-between;
 }
 #hours, #minutes {
 	padding: 5pt;
@@ -44,8 +44,8 @@ body {
 	border-radius: 5pt;
 	font-size: 20pt;
 }
-#hours {
-	margin-right: 15pt;
+#minutes {
+	margin-left: auto;
 }
 caption {
 	text-align: left;
@@ -71,7 +71,7 @@ caption {
 	text-align: center;
 	align-self: baseline;
 }
-#current-time {
+#cur-time {
 	flex: 1;
 	font-size: 40pt;
 	text-align: left;
