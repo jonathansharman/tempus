@@ -121,12 +121,11 @@ alarmHour = 12;
 alarmMinute = 10;
 
 setMilitary((function() {
-	let military = localStorage.getItem("military");
-	if (military == null) {
-		localStorage.setItem("military", true);
+	let current = localStorage["military"];
+	if (current == null) {
 		return true;
 	}
-	return military;
+	return current;
 })());
 
 // Unhide body after building page.
