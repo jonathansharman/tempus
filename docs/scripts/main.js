@@ -122,7 +122,7 @@ alarmMinute = 10;
 
 setMilitary((function() {
 	let current = localStorage["military"];
-	if (current == null) {
+	if (current === null) {
 		return true;
 	}
 	return current;
