@@ -53,6 +53,7 @@ function makeTableH() {
 				cell.className += " selected";
 			}
 			cell.onclick = () => {
+				turnOffAlarm();
 				setAlarmH(hour);
 				updateAlarmDisplay();
 				updateLeft();
@@ -81,6 +82,7 @@ function makeTableM() {
 				cell.className += " selected";
 			}
 			cell.onclick = () => {
+				turnOffAlarm();
 				setAlarmM(m);
 				updateAlarmDisplay();
 				updateLeft();
