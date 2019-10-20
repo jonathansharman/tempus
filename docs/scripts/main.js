@@ -75,10 +75,7 @@ function makeTableH() {
 	offButton.className = "time";
 	
 	offButton.onclick = () => {
-		turnOffAlarm();
-		setAlarmH(null);
-		updateAlarmDisplay();
-		updateLeft();
+		stop();
 	}
 }
 
@@ -149,9 +146,6 @@ function setAlarmM(value) {
 	alarmM = value;
 	// Select the new cell.
 	document.getElementById("m" + alarmM).className = "time selected";
-	// Update display.
-	updateAlarmDisplay();
-	updateLeft();
 }
 
 // Updates the current system time.
@@ -214,10 +208,6 @@ setMilitary((() => {
 // Unhide body after building page.
 document.getElementsByTagName("body")[0].style.visibility = "visible";
 
-function toggleMilitary(checkbox) {
-	setMilitary(checkbox.checked);
-}
-
 function turnOffAlarm() {
 	alarm = false;
 	// Stop the sound.
@@ -226,9 +216,6 @@ function turnOffAlarm() {
 	// Disable snooze and stop buttons.
 	snoozeButton.disabled = true;
 	stopButton.disabled = true;
-	// Update display.
-	updateAlarmDisplay();
-	updateLeft();
 }
 
 // Reset the alarm for some number of minutes later.
@@ -242,6 +229,9 @@ function snooze() {
 	setAlarmM(newAlarmM);
 	setAlarmH(newAlarmH);
 	turnOffAlarm();
+	// Update display.
+	updateAlarmDisplay();
+	updateLeft();
 }
 
 // Stop the alarm and reset the alarm time.
@@ -249,6 +239,9 @@ function stop() {
 	setAlarmH(null);
 	setAlarmM(0);
 	turnOffAlarm();
+	// Update display.
+	updateAlarmDisplay();
+	updateLeft();
 }
 
 // Update every 100 ms.
