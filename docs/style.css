@@ -1,5 +1,11 @@
+.flex-container {
+	display: flex;
+	justify-content: center;
+}
+
 body {
-	width: 1000px;
+	width: 920px;
+	height: 100%;
 	position: fixed;
 	left: 50%;
 	transform: translateX(-50%);
@@ -11,25 +17,13 @@ body {
 	visibility: hidden;
 }
 
-.centered {
-	margin: 0 auto;
-	width: 100%;
-}
-
-td, .time {
-	font-family: Consolas, monospace;
-}
-
-#militaryContainer {
-	float: right;
-}
+/* Hours and minutes container */
 
 #hoursMinutesContainer {
 	clear: right;
 	display: flex;
 	vertical-align: bottom;
 }
-
 #hours, #minutes {
 	padding: 5pt;
 	border: 1px solid #a0a0a0;
@@ -46,101 +40,90 @@ caption {
 	text-align: left;
 }
 
-#timesContainer {
-	display: flex;
-	justify-content: center;
-	vertical-align: bottom;
-}
+/* Times */
 
-#currentTime {
-	text-align: left;
-	align-self: baseline;
-}
 #alarmTime {
-	flex: 1;
-	font-size: 86pt;
+	font-size: 128pt;
 	text-align: center;
 	align-self: baseline;
 }
+#currentTime {
+	flex: 1;
+	font-size: 40pt;
+	text-align: left;
+	align-self: baseline;
+}
 #timeLeft {
+	flex: 1;
+	font-size: 40pt;
 	text-align: right;
 	align-self: baseline;
 }
 
-#currentTime, #timeLeft {
-	font-size: 40pt;
+/* 24-hour time checkbox */
+
+#militaryContainer {
+	float: right;
 }
+#militaryContainer > input {
+	width: 12pt;
+	height: 12pt;
+}
+#militaryContainer > label {
+	font-size: 22pt;
+	user-select: none;
+}
+
+/* Buttons */
+
+button {
+	color: #000;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	margin: 10px 10px 0 0;
+}
+#snooze {
+	font-size: 48pt;
+	background-color: #3570a5;
+	padding: 14px 24px;
+}
+#snooze:hover {
+	background-color: #5085c0;
+}
+#stop {
+	font-size: 24pt;
+	background-color: #a53535;
+	padding: 14px 16px;
+}
+#stop:hover {
+	background-color: #c05050;
+}
+button:disabled {
+	background-color: #303030;
+}
+
+/* Footer */
+
+#footer {
+	width: 100%;
+	position: fixed;
+	top: 100%;
+	transform: translateY(-135%);
+	text-align: center;
+	font-size: 14pt;
+	z-index: -1;
+}
+#logo {
+	margin-top: 25px;
+}
+
+/* Links */
 
 a:link {
 	color: #d05050;
 }
 a:visited {
 	color: #a0a0a0;
-}
-
-input[type="checkbox"] {
-	width: 12pt;
-	height: 12pt;
-}
-label {
-	font-size: 22pt;
-	user-select: none;
-}
-
-#footer {
-	font-size: 14pt;
-	margin: 10px 0 0 0;
-	text-align: center;
-}
-#logo {
-	width: 100%;
-	margin-top: 25px;
-}
-
-
-
-
-
-
-
-ul.nav {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	border-radius: 5px;
-	background-color: #3570a5;
-}
-li.nav {
-	float: left;
-}
-li.nav a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-li.nav:hover:not(.active) {
-	background-color: #5085c0;
-}
-li.nav.active {
-	color: white;
-	background-color: #b05050;
-}
-
-button {
-	display: block;
-	color: white;
-	background-color: #3570a5;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	border: none;
-	border-radius: 5px;
-	display: inline-block;
-	font-size: 16px;
-}
-button:hover {
-	background-color: #5085c0;
 }
