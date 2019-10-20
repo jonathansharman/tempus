@@ -48,7 +48,7 @@ function makeTableH() {
 				cell.innerHTML = colIdx == 0 ? "12" : colIdx.toString();
 			}
 			cell.id = "h" + hour;
-			cell.className = "time hour";
+			cell.className = "time";
 			if (alarmH === hour) {
 				cell.className += " selected";
 			}
@@ -66,6 +66,20 @@ function makeTableH() {
 			row.insertCell(0).innerHTML = amPm;
 		}
 	}
+	// Add "OFF" option to the third row.
+	const row = tableH.insertRow(2);
+	const offButton = row.insertCell(0);
+	offButton.innerHTML = "OFF";
+	offButton.colSpan = military ? 12 : 14;
+	offButton.style += "; text-align: center";
+	offButton.className = "time";
+	
+	offButton.onclick = () => {
+		turnOffAlarm();
+		setAlarmH(null);
+		updateAlarmDisplay();
+		updateLeft();
+	}
 }
 
 function makeTableM() {
@@ -77,7 +91,7 @@ function makeTableM() {
 			const cell = row.insertCell(colIdx);
 			cell.innerHTML = twoDigit(m);
 			cell.id = "m" + m;
-			cell.className = "time min";
+			cell.className = "time";
 			if (alarmM === m) {
 				cell.className += " selected";
 			}

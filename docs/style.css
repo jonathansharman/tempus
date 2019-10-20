@@ -13,6 +13,7 @@ body {
 	color: #a0a0a0;
 	background-color: #000;
 	font-family: Calibri, Helvetica, sans-serif;
+	user-select: none;
 	/* Hide body until dynamic elements load. */
 	visibility: hidden;
 }
@@ -28,7 +29,6 @@ body {
 }
 #military-container > label {
 	font-size: 22pt;
-	user-select: none;
 }
 
 /* Alarm hours and minutes UI */
@@ -44,6 +44,9 @@ body {
 	border-radius: 5pt;
 	font-size: 20pt;
 }
+#hours {
+	width: 480px;
+}
 #minutes {
 	margin-left: auto;
 }
@@ -51,7 +54,6 @@ caption {
 	text-align: left;
 }
 .time {
-	user-select: none;
 	padding-left: 4pt;
 	padding-right: 4pt;
 }
@@ -124,6 +126,7 @@ button {
 	text-align: center;
 	font-size: 14pt;
 	z-index: -1;
+	user-select: text;
 }
 #logo {
 	margin-top: 25px;
