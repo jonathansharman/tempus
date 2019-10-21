@@ -33,7 +33,7 @@ function setup() {
 	noSleep.enable();
 	// Set up alarm audio.
 	alarmSound.loop = true;
-	alarmSound.play().catch(error => { log("Could not play alarm!"); });
+	alarmSound.play();
 	alarmSound.pause();
 }
 document.addEventListener("click", setup, false);
