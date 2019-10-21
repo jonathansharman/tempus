@@ -1,12 +1,5 @@
 "use strict";
 
-// Use NoSleep.js to prevent the screen from sleeping.
-const noSleep = new NoSleep();
-document.addEventListener('click', function enableNoSleep() {
-	document.removeEventListener('click', enableNoSleep, false);
-	noSleep.enable();
-}, false);
-
 const snoozeM = 9;
 
 let military = null;
@@ -29,6 +22,22 @@ const tableM = document.getElementById("minutes").tBodies[0];
 const snoozeButton = document.getElementById("snooze");
 const stopButton = document.getElementById("stop");
 let alarmSound =  document.getElementById("alarm-sound");
+
+const noSleep = new NoSleep();
+
+// Perform no-sleep/audio setup when user first interacts with page.
+function setup() {
+	document.removeEventListener("click", setup, false);
+	document.removeEventListener("touchstart", setup, false);
+	// Use NoSleep.js to prevent the device from sleeping.
+	noSleep.enable();
+	// Set up alarm audio.
+	alarmSound.loop = true;
+	alarmSound.play();
+	alarmSound.pause();
+}
+document.addEventListener("click", setup, false);
+document.addEventListener("touchstart", setup, false);
 
 function twoDigit(n) {
 	return n < 10 ? "0" + n.toString() : n.toString();
@@ -172,7 +181,7 @@ function updateLeft() {
 		}
 		if (leftH == 0 && leftM == 0 && leftS == 0) {
 			// Alarm time!
-			alarm = true;
+			alarmSound.play();
 			snoozeButton.disabled = false;
 			stopButton.disabled = false;
 		}
@@ -205,11 +214,10 @@ setMilitary((() => {
 	return current;
 })());
 
-// Unhide body after building page.
+// Show body after building page.
 document.getElementsByTagName("body")[0].style.visibility = "visible";
 
 function turnOffAlarm() {
-	alarm = false;
 	// Stop the sound.
 	alarmSound.pause();
 	alarmSound.currentTime = 0;
@@ -248,7 +256,4 @@ function stop() {
 setInterval(() => {
 	updateCur();
 	updateLeft();
-	if (alarm && alarmSound.paused) {
-		alarmSound.play().catch(error => { log("Could not play alarm!"); });
-	}
 }, 100);
