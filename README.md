@@ -1,2 +1,2 @@
 # Tempus
-A simple online alarm clock.
+The two-click online alarm clock.
