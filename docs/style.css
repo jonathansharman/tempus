@@ -56,6 +56,7 @@ caption {
 .time {
 	padding-left: 4pt;
 	padding-right: 4pt;
+	border-radius: 5pt;
 }
 .time.selected {
 	color: #000;
