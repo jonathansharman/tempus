@@ -1,7 +1,5 @@
 "use strict";
 
-let military = null;
-
 let alarm = false;
 
 let alarmH = null;
@@ -16,6 +14,7 @@ let leftM = null;
 let leftS = null;
 
 const content = document.getElementById("content");
+const military = document.getElementById("military");
 const tableH = document.getElementById("hours").tBodies[0];
 const tableM = document.getElementById("minutes").tBodies[0];
 const snoozeButton = document.getElementById("snooze");
@@ -50,7 +49,7 @@ function makeTableH() {
 		for (let colIdx = 0; colIdx < 12; ++colIdx) {
 			const hour = 12 * rowIdx + colIdx;
 			const cell = row.insertCell(colIdx);
-			if (military) {
+			if (military.checked) {
 				cell.innerHTML = twoDigit(hour);
 			} else {
 				cell.innerHTML = colIdx == 0 ? "12" : colIdx.toString();
@@ -67,7 +66,7 @@ function makeTableH() {
 				updateLeft();
 			};
 		}
-		if (!military) {
+		if (!military.checked) {
 			// Add am/pm to the beginning and end of the rows under 12-hour time.
 			const amPm = rowIdx == 0 ? "am" : "pm";
 			row.insertCell(12).innerHTML = amPm;
@@ -78,7 +77,7 @@ function makeTableH() {
 	const row = tableH.insertRow(2);
 	const offButton = row.insertCell(0);
 	offButton.innerHTML = "OFF";
-	offButton.colSpan = military ? 12 : 14;
+	offButton.colSpan = military.checked ? 12 : 14;
 	offButton.style += "; text-align: center";
 	offButton.className = "time";
 	
@@ -111,14 +110,14 @@ function makeTableM() {
 }
 
 function timeString(hour, minute, second = null) {
-	var result = military
+	var result = military.checked
 		? twoDigit(hour)
 		: hour == 0 || hour == 12 ? "12" : (hour % 12).toString();
 	result += ":" + twoDigit(minute);
 	if (second != null) {
 		result += ":" + twoDigit(second);
 	}
-	if (!military) {
+	if (!military.checked) {
 		result += hour < 12 ? " am" : " pm";
 	}
 	return result;
@@ -196,10 +195,13 @@ function updateLeft() {
 
 // Sets the military time setting and updates all the elements accordingly.
 function setMilitary(value) {
-	military = value;
+	// Update checkbox and local storage.
+	military.checked = value;
 	localStorage.setItem("military", value);
+	// Remake tables.
 	makeTableH();
 	makeTableM();
+	// Update display.
 	updateAlarmDisplay();
 	updateCur();
 }
@@ -261,13 +263,7 @@ function scaleContent() {
 }
 
 // Load military time setting from local storage and initialize everything.
-setMilitary((() => {
-	let current = localStorage["military"];
-	if (current === null) {
-		return true;
-	}
-	return current;
-})());
+setMilitary(localStorage["military"] === "true");
 
 // Update every 100 ms.
 setInterval(() => {
