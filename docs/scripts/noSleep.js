@@ -76,5 +76,3 @@ class NoSleep {
     }
   }
 };
-
-module.exports = NoSleep
