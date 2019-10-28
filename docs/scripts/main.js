@@ -1,7 +1,5 @@
 "use strict";
 
-const snoozeM = 9;
-
 let military = null;
 
 let alarm = false;
@@ -17,6 +15,7 @@ let leftH = null;
 let leftM = null;
 let leftS = null;
 
+const content = document.getElementById("content");
 const tableH = document.getElementById("hours").tBodies[0];
 const tableM = document.getElementById("minutes").tBodies[0];
 const snoozeButton = document.getElementById("snooze");
@@ -205,18 +204,6 @@ function setMilitary(value) {
 	updateCur();
 }
 
-// Load military time setting from local storage and initialize everything.
-setMilitary((() => {
-	let current = localStorage["military"];
-	if (current === null) {
-		return true;
-	}
-	return current;
-})());
-
-// Show body after building page.
-document.getElementsByTagName("body")[0].style.visibility = "visible";
-
 function turnOffAlarm() {
 	// Stop the sound.
 	alarmSound.pause();
@@ -228,6 +215,9 @@ function turnOffAlarm() {
 
 // Reset the alarm for some number of minutes later.
 function snooze() {
+	// The number of minutes to snooze.
+	const snoozeM = 9;
+	// Set new alarm time.
 	let newAlarmM = alarmM + snoozeM;
 	let newAlarmH = alarmH;
 	if (newAlarmM >= 60) {
@@ -252,8 +242,41 @@ function stop() {
 	updateLeft();
 }
 
+// Scales the page contents to fit the screen.
+function scaleContent() {
+	// The width of the body in pixels prior to scaling.
+	const standardBodyWidth = 1000;
+	// Reset width and zoom to normal.
+	document.body.style.width = standardBodyWidth;
+	content.style.zoom = "100%";
+	// Calculate zoom factor 
+	let w = content.offsetWidth;
+	let h = content.offsetHeight;
+	let wFactor = window.innerWidth / w;
+	let hFactor = window.innerHeight / h;
+	let zoom = 0.95 * Math.min(wFactor, hFactor);
+	// Scale body width and content zoom.
+	document.body.style.width = zoom * standardBodyWidth;
+	content.style.zoom = (100 * zoom) + "%";
+}
+
+// Load military time setting from local storage and initialize everything.
+setMilitary((() => {
+	let current = localStorage["military"];
+	if (current === null) {
+		return true;
+	}
+	return current;
+})());
+
 // Update every 100 ms.
 setInterval(() => {
 	updateCur();
 	updateLeft();
 }, 100);
+
+// Scale the content initially.
+scaleContent();
+
+// Show body after building page.
+document.getElementsByTagName("body")[0].style.visibility = "visible";

@@ -1,21 +1,22 @@
-.flex-container {
-	display: flex;
-	justify-content: center;
-}
-
 body {
-	width: 920px;
-	height: 100%;
 	position: fixed;
 	left: 50%;
-	transform: translateX(-50%);
-	padding-top: 12px;
+	transform: translateX(-51%);
 	color: #a0a0a0;
 	background-color: #000;
 	font-family: Calibri, Helvetica, sans-serif;
 	user-select: none;
 	/* Hide body until dynamic elements load. */
 	visibility: hidden;
+}
+
+.flex-container {
+	display: flex;
+	justify-content: center;
+}
+
+#content {
+	width: 100%;
 }
 
 /* 24-hour time checkbox */
@@ -45,10 +46,10 @@ body {
 	font-size: 20pt;
 }
 #hours {
-	width: 480px;
+	width: 48%;
 }
 #minutes {
-	margin-left: auto;
+	width: 48%;
 }
 caption {
 	text-align: left;
@@ -94,7 +95,6 @@ button {
 	font-weight: bold;
 	border: none;
 	border-radius: 5px;
-	font-size: 16px;
 	margin: 10px 10px 0 0;
 }
 #snooze {
@@ -119,18 +119,14 @@ button {
 
 /* Footer */
 
-#footer {
-	width: 100%;
-	position: fixed;
-	top: 100%;
-	transform: translateY(-135%);
-	text-align: center;
+#created-by {
 	font-size: 14pt;
-	z-index: -1;
+	margin-top: 20pt;
 	user-select: text;
 }
 #logo {
-	margin-top: 25px;
+	height: 50px;
+	margin-top: 15pt;
 }
 
 /* Links */

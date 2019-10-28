@@ -13,37 +13,41 @@
 	<script src="scripts/noSleep.js"></script>
 </head>
 
-<body>
+<body onresize="scaleContent()">
 	<audio id="alarm-sound" src="alarm.wav" preload>Your browser does not support HTML5 audio!</audio>
 
-	<div id="military-container">
-		<input id="military" type="checkbox" onchange="setMilitary(this.checked)" checked>
-		<label for="military">24-hour time</label>
-	</div>
-	<div id="h-m-container">
-		<table id="hours">
-			<caption>Hours</caption>
-			<tbody></tbody>
-		</table>
-		<table id="minutes">
-			<caption>Minutes</caption>
-			<tbody></tbody>
-		</table>
-	</div>
-	<div class="flex-container">
-		<span id="alarm-time"></span>
-	</div>
-	<div class="flex-container">
-		<span id="cur-time"></span>
-		<button id="snooze" type="button" onclick="snooze()" disabled>Snooze</button>
-		<span id="time-left"></span>
-	</div>
-	<div class="flex-container">
-		<button id="stop" type="button" onclick="stop()" disabled>Stop</button>
-	</div>
-	<div id="footer">
-		<div>Created by <a href="https://www.jonathansharman.com" target="_blank">Jonathan Sharman</a>.</div>
-		<div><img id="logo" src="logo.svg" width="96" height="96" alt="logo"></div>
+	<div id="content">
+		<div id="military-container">
+			<input id="military" type="checkbox" onchange="setMilitary(this.checked)" checked>
+			<label for="military">24-hour time</label>
+		</div>
+		<div id="h-m-container">
+			<table id="hours">
+				<caption>Hours</caption>
+				<tbody></tbody>
+			</table>
+			<table id="minutes">
+				<caption>Minutes</caption>
+				<tbody></tbody>
+			</table>
+		</div>
+		<div class="flex-container">
+			<span id="alarm-time"></span>
+		</div>
+		<div class="flex-container">
+			<span id="cur-time"></span>
+			<button id="snooze" type="button" onclick="snooze()" disabled>Snooze</button>
+			<span id="time-left"></span>
+		</div>
+		<div class="flex-container">
+			<button id="stop" type="button" onclick="stop()" disabled>Stop</button>
+		</div>
+		<div id="created-by" class="flex-container">
+			<span>Created by <a href="https://www.jonathansharman.com" target="_blank">Jonathan Sharman</a>.</span>
+		</div>
+		<div id="logo" class="flex-container">
+			<img src="logo.svg" width="50" height="50" alt="logo">
+		</div>
 	</div>
 </body>
 
