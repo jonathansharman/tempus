@@ -1,20 +1,25 @@
 "use strict";
 
-let alarm = false;
-
+// Alarm time.
 let alarmH = null;
 let alarmM = 0;
 
+// Current time.
 let curH = null;
 let curM = null;
 let curS = null;
 
+// Time left before alarm.
 let leftH = null;
 let leftM = null;
 let leftS = null;
 
+// If true, currently using 24-hour ("military") time, otherwise 12-hour time.
+let military = null;
+
 const content = document.getElementById("content");
-const military = document.getElementById("military");
+const twelveHour = document.getElementById("12-hour");
+const twentyFourHour = document.getElementById("24-hour");
 const tableH = document.getElementById("hours").tBodies[0];
 const tableM = document.getElementById("minutes").tBodies[0];
 const snoozeButton = document.getElementById("snooze");
@@ -49,13 +54,13 @@ function makeTableH() {
 		for (let colIdx = 0; colIdx < 12; ++colIdx) {
 			const hour = 12 * rowIdx + colIdx;
 			const cell = row.insertCell(colIdx);
-			if (military.checked) {
+			if (military) {
 				cell.innerHTML = twoDigit(hour);
 			} else {
 				cell.innerHTML = colIdx == 0 ? "12" : colIdx.toString();
 			}
 			cell.id = "h" + hour;
-			cell.className = "time";
+			cell.className = "selectable";
 			if (alarmH === hour) {
 				cell.className += " selected";
 			}
@@ -66,7 +71,7 @@ function makeTableH() {
 				updateLeft();
 			};
 		}
-		if (!military.checked) {
+		if (!military) {
 			// Add am/pm to the beginning and end of the rows under 12-hour time.
 			const amPm = rowIdx == 0 ? "am" : "pm";
 			row.insertCell(12).innerHTML = amPm;
@@ -77,9 +82,9 @@ function makeTableH() {
 	const row = tableH.insertRow(2);
 	const offButton = row.insertCell(0);
 	offButton.innerHTML = "OFF";
-	offButton.colSpan = military.checked ? 12 : 14;
+	offButton.colSpan = military ? 12 : 14;
 	offButton.style += "; text-align: center";
-	offButton.className = "time";
+	offButton.className = "selectable";
 	
 	offButton.onclick = () => {
 		stop();
@@ -95,7 +100,7 @@ function makeTableM() {
 			const cell = row.insertCell(colIdx);
 			cell.innerHTML = twoDigit(m);
 			cell.id = "m" + m;
-			cell.className = "time";
+			cell.className = "selectable";
 			if (alarmM === m) {
 				cell.className += " selected";
 			}
@@ -110,14 +115,14 @@ function makeTableM() {
 }
 
 function timeString(hour, minute, second = null) {
-	var result = military.checked
+	var result = military
 		? twoDigit(hour)
 		: hour == 0 || hour == 12 ? "12" : (hour % 12).toString();
 	result += ":" + twoDigit(minute);
 	if (second != null) {
 		result += ":" + twoDigit(second);
 	}
-	if (!military.checked) {
+	if (!military) {
 		result += hour < 12 ? " am" : " pm";
 	}
 	return result;
@@ -137,22 +142,22 @@ function updateAlarmDisplay() {
 function setAlarmH(value) {
 	if (alarmH != null) {
 		// Deselect the previously selected cell.
-		document.getElementById("h" + alarmH).className = "time";
+		document.getElementById("h" + alarmH).className = "selectable";
 	}
 	alarmH = value;
 	// Select the new cell, if any.
 	if (alarmH != null) {
-		document.getElementById("h" + alarmH).className = "time selected";
+		document.getElementById("h" + alarmH).className = "selectable selected";
 	}
 }
 
 // Sets the minute component of the alarm time.
 function setAlarmM(value) {
 	// Deselect the previously selected cell.
-	document.getElementById("m" + alarmM).className = "time";
+	document.getElementById("m" + alarmM).className = "selectable";
 	alarmM = value;
 	// Select the new cell.
-	document.getElementById("m" + alarmM).className = "time selected";
+	document.getElementById("m" + alarmM).className = "selectable selected";
 }
 
 // Updates the current system time.
@@ -193,10 +198,12 @@ function updateLeft() {
 	document.getElementById("time-left").innerHTML = leftText;
 }
 
-// Sets the military time setting and updates all the elements accordingly.
+// Sets the time format and updates all the elements accordingly.
 function setMilitary(value) {
-	// Update checkbox and local storage.
-	military.checked = value;
+	military = value;
+	// Update selectors and local storage.
+	twelveHour.className = value ? "selectable" : "selectable selected";
+	twentyFourHour.className = value ? "selectable selected" : "selectable";
 	localStorage.setItem("military", value);
 	// Remake tables.
 	makeTableH();
@@ -262,7 +269,7 @@ function scaleContent() {
 	content.style.zoom = (100 * zoom) + "%";
 }
 
-// Load military time setting from local storage and initialize everything.
+// Load time format from local storage and initialize everything.
 setMilitary(localStorage["military"] === "true");
 
 // Update every 100 ms.

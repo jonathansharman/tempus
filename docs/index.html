@@ -17,17 +17,17 @@
 	<audio id="alarm-sound" src="alarm.wav" preload>Your browser does not support HTML5 audio!</audio>
 
 	<div id="content">
-		<div id="military-container">
-			<input id="military" type="checkbox" onchange="setMilitary(this.checked)" checked>
-			<label for="military">24-hour time</label>
+		<div id="format-container">
+			<span id="12-hour" class="selectable" onclick="setMilitary(false)">12-hour</span>
+			<span id="24-hour" class="selectable" onclick="setMilitary(true)">24-hour</span>
 		</div>
 		<div id="h-m-container">
 			<table id="hours">
-				<caption>Hours</caption>
+				<caption>Hour</caption>
 				<tbody></tbody>
 			</table>
 			<table id="minutes">
-				<caption>Minutes</caption>
+				<caption>Minute</caption>
 				<tbody></tbody>
 			</table>
 		</div>

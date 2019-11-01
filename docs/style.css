@@ -15,21 +15,30 @@ body {
 	justify-content: center;
 }
 
+.selectable {
+	padding-left: 4pt;
+	padding-right: 4pt;
+	border-radius: 5pt;
+	text-align: center;
+}
+.selectable:hover {
+	color: #000;
+	background-color: #ccc;
+}
+.selected {
+	color: #000;
+	background-color: #a0a0a0;
+}
+
 #content {
 	width: 100%;
 }
 
 /* 24-hour time checkbox */
 
-#military-container {
+#format-container {
 	float: right;
-}
-#military-container > input {
-	width: 12pt;
-	height: 12pt;
-}
-#military-container > label {
-	font-size: 22pt;
+	font-size: 18pt;
 }
 
 /* Alarm hours and minutes UI */
@@ -53,19 +62,6 @@ body {
 }
 caption {
 	text-align: left;
-}
-.time {
-	padding-left: 4pt;
-	padding-right: 4pt;
-	border-radius: 5pt;
-}
-.time.selected {
-	color: #000;
-	background-color: #a0a0a0;
-}
-.time:hover {
-	color: #000;
-	background-color: #ccc;
 }
 
 /* Times */
