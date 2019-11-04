@@ -251,6 +251,15 @@ function stop() {
 	updateLeft();
 }
 
+// Keyboard shortcuts for snooze/stop.
+document.addEventListener("keydown", (event) => {
+	if (event.keyCode == 32) { // space
+		snoozeButton.click();
+	} else if (event.keyCode == 27) { // escape
+		stopButton.click();
+	}
+});
+
 // Scales the page contents to fit the screen.
 function scaleContent() {
 	// The width of the body in pixels prior to scaling.
