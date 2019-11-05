@@ -30,6 +30,10 @@ body {
 	background-color: #a0a0a0;
 }
 
+.fill {
+	flex: 1;
+}
+
 #content {
 	width: 100%;
 }
@@ -66,15 +70,27 @@ caption {
 
 /* Times */
 
-#alarm-time {
-	font-size: 128pt;
-	text-align: center;
+#cur {
+	flex: 1;
+	text-align: left;
 	align-self: baseline;
 }
 #cur-time {
-	flex: 1;
 	font-size: 40pt;
-	text-align: left;
+}
+#cur-am-pm {
+	font-size: 28pt;
+}
+#alarm {
+	text-align: center;
+	align-self: baseline;
+}
+#alarm-time {
+	font-size: 128pt;
+	align-self: baseline;
+}
+#alarm-am-pm {
+	font-size: 64pt;
 	align-self: baseline;
 }
 #time-left {
@@ -115,14 +131,17 @@ button {
 
 /* Footer */
 
+#footer {
+	flex: 1;
+	text-align: right;
+	align-self: flex-end;
+}
 #created-by {
 	font-size: 14pt;
-	margin-top: 20pt;
 	user-select: text;
 }
 #logo {
-	height: 50px;
-	margin-top: 15pt;
+	transform: translateY(29%);
 }
 
 /* Links */
