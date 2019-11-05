@@ -41,31 +41,9 @@ body {
 /* 24-hour time checkbox */
 
 #format-container {
-	float: right;
+	position: fixed;
+	right: 0;
 	font-size: 18pt;
-}
-
-/* Alarm hours and minutes UI */
-
-#h-m-container {
-	clear: right;
-	display: flex;
-	justify-content: space-between;
-}
-#hours, #minutes {
-	padding: 5pt;
-	border: 1px solid #a0a0a0;
-	border-radius: 5pt;
-	font-size: 20pt;
-}
-#hours {
-	width: 48%;
-}
-#minutes {
-	width: 48%;
-}
-caption {
-	text-align: left;
 }
 
 /* Times */
@@ -100,6 +78,28 @@ caption {
 	align-self: baseline;
 }
 
+/* Alarm hours and minutes UI */
+
+#h-m-container {
+	display: flex;
+	justify-content: space-between;
+}
+#hours, #minutes {
+	padding: 5pt;
+	border: 1px solid #a0a0a0;
+	border-radius: 5pt;
+	font-size: 20pt;
+}
+#hours {
+	width: 48%;
+}
+#minutes {
+	width: 48%;
+}
+caption {
+	text-align: left;
+}
+
 /* Buttons */
 
 button {
@@ -113,6 +113,7 @@ button {
 	font-size: 48pt;
 	background-color: #3570a5;
 	padding: 14px 24px;
+	margin-top: 32px;
 }
 #snooze:hover {
 	background-color: #5085c0;

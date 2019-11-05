@@ -21,17 +21,7 @@
 			<span id="12-hour" class="selectable" onclick="setMilitary(false)">12-hour</span>
 			<span id="24-hour" class="selectable" onclick="setMilitary(true)">24-hour</span>
 		</div>
-		<div id="h-m-container">
-			<table id="hours">
-				<caption>Hour</caption>
-				<tbody></tbody>
-			</table>
-			<table id="minutes">
-				<caption>Minute</caption>
-				<tbody></tbody>
-			</table>
-		</div>
-		<div class="flex-container">
+		<div id="clock-container" class="flex-container">
 			<span id="cur">
 				<span id="cur-time"></span>
 				<span id="cur-am-pm"></span>
@@ -41,6 +31,16 @@
 				<span id="alarm-am-pm"></span>
 			</span>
 			<span id="time-left"></span>
+		</div>
+		<div id="h-m-container">
+			<table id="hours">
+				<caption>Hour</caption>
+				<tbody></tbody>
+			</table>
+			<table id="minutes">
+				<caption>Minute</caption>
+				<tbody></tbody>
+			</table>
 		</div>
 		<div class="flex-container">
 			<button id="snooze" type="button" onclick="snooze()" disabled>Snooze</button>
