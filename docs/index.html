@@ -17,6 +17,10 @@
 	<audio id="alarm-sound" src="alarm.wav" preload>Your browser does not support HTML5 audio!</audio>
 
 	<div id="content">
+		<div id="mode-container">
+			<span id="clock-mode" class="selectable" onclick="setCountdown(false)">Alarm Clock</span>
+			<span id="countdown-mode" class="selectable" onclick="setCountdown(true)">Countdown Timer</span>
+		</div>
 		<div id="format-container">
 			<span id="12-hour" class="selectable" onclick="setMilitary(false)">12-hour</span>
 			<span id="24-hour" class="selectable" onclick="setMilitary(true)">24-hour</span>

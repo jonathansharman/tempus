@@ -14,6 +14,9 @@ let leftH = null;
 let leftM = null;
 let leftS = null;
 
+// If true, currently in countdown mode, otherwise in alarm clock mode.
+let countdown = null;
+
 // If true, currently using 24-hour ("military") time, otherwise 12-hour time.
 let military = null;
 
@@ -198,6 +201,21 @@ function updateLeft() {
 	document.getElementById("time-left").innerHTML = leftText;
 }
 
+// Sets the alarm clock/countdown mode and updates all the elements accordingly.
+function setCountdown(value) {
+	countdown = value;
+	// Update selectors and local storage.
+	//   twelveHour.className = value ? "selectable" : "selectable selected";
+	//   twentyFourHour.className = value ? "selectable selected" : "selectable";
+	//   localStorage.setItem("military", value);
+	// Remake tables.
+	//   makeTableH();
+	//   makeTableM();
+	// Update display.
+	//   updateAlarmDisplay();
+	//   updateCur();
+}
+
 // Sets the time format and updates all the elements accordingly.
 function setMilitary(value) {
 	military = value;
@@ -269,7 +287,10 @@ function scaleContent() {
 	content.style.zoom = (100 * zoom) + "%";
 }
 
-// Load time format from local storage and initialize everything.
+// Load mode from local storage.
+setCountdown(localStorage["countdown"] === "true");
+
+// Load time format from local storage.
 setMilitary(localStorage["military"] === "true");
 
 // Update every 100 ms.

@@ -34,7 +34,14 @@ body {
 	width: 100%;
 }
 
-/* 24-hour time checkbox */
+/* Alarm clock/countdown checkbox */
+
+#mode-container {
+	float: left;
+	font-size: 18pt;
+}
+
+/* Time format checkbox */
 
 #format-container {
 	float: right;
