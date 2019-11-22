@@ -21,12 +21,22 @@ let countdown = null;
 let military = null;
 
 const content = document.getElementById("content");
+
 const twelveHour = document.getElementById("12-hour");
 const twentyFourHour = document.getElementById("24-hour");
+
 const tableH = document.getElementById("hours").tBodies[0];
 const tableM = document.getElementById("minutes").tBodies[0];
+
+const alarmTime = document.getElementById("alarm-time");
+const alarmAmPm = document.getElementById("alarm-am-pm");
+const curTime = document.getElementById("cur-time");
+const curAmPm = document.getElementById("cur-am-pm");
+const timeLeft = document.getElementById("time-left");
+
 const snoozeButton = document.getElementById("snooze");
 const stopButton = document.getElementById("stop");
+
 let alarmSound =  document.getElementById("alarm-sound");
 
 const noSleep = new NoSleep();
@@ -125,20 +135,18 @@ function timeString(hour, minute, second = null) {
 	if (second != null) {
 		result += ":" + twoDigit(second);
 	}
-	if (!military) {
-		result += hour < 12 ? " am" : " pm";
-	}
 	return result;
 }
 
 // Updates the alarm time display based on current alarm values.
 function updateAlarmDisplay() {
 	if (alarmH != null) {
-		var alarmTimeText = timeString(alarmH, alarmM);
+		alarmTime.innerHTML = timeString(alarmH, alarmM);
+		alarmAmPm.innerHTML = military ? "" : alarmH < 12 ? "am" : "pm";
 	} else {
-		var alarmTimeText = "OFF";
+		alarmTime.innerHTML = "OFF";
+		alarmAmPm.innerHTML = "";
 	}
-	document.getElementById("alarm-time").innerHTML = alarmTimeText;
 }
 
 // Sets the hour component of the alarm time.
@@ -169,7 +177,8 @@ function updateCur() {
 	curH = date.getHours();
 	curM = date.getMinutes();
 	curS = date.getSeconds();
-	document.getElementById("cur-time").innerHTML = timeString(curH, curM, curS);
+	curTime.innerHTML = timeString(curH, curM, curS);
+	curAmPm.innerHTML = military ? "" : curH < 12 ? "am" : "pm";
 };
 
 // Updates and displays the time left until alarm.
@@ -198,7 +207,7 @@ function updateLeft() {
 		leftS = null;
 		var leftText = "--:--:--";
 	}
-	document.getElementById("time-left").innerHTML = leftText;
+	timeLeft.innerHTML = leftText;
 }
 
 // Sets the alarm clock/countdown mode and updates all the elements accordingly.
@@ -268,6 +277,15 @@ function stop() {
 	updateAlarmDisplay();
 	updateLeft();
 }
+
+// Keyboard shortcuts for snooze/stop.
+document.addEventListener("keydown", (event) => {
+	if (event.keyCode == 32) { // space
+		snoozeButton.click();
+	} else if (event.keyCode == 27) { // escape
+		stopButton.click();
+	}
+});
 
 // Scales the page contents to fit the screen.
 function scaleContent() {
