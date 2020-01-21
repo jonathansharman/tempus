@@ -41,7 +41,8 @@ body {
 /* Alarm clock/countdown checkbox */
 
 #mode-container {
-	float: left;
+	position: fixed;
+	left: 0;
 	font-size: 18pt;
 }
 
@@ -57,7 +58,6 @@ body {
 
 #cur {
 	flex: 1;
-	text-align: left;
 	align-self: baseline;
 }
 #cur-time {
@@ -66,22 +66,29 @@ body {
 #cur-am-pm {
 	font-size: 28pt;
 }
-#alarm {
+#primary {
 	text-align: center;
 	align-self: baseline;
 }
-#alarm-time {
-	font-size: 128pt;
+#primary-time {
+	font-size: 96pt;
 	align-self: baseline;
 }
-#alarm-am-pm {
+#primary-am-pm {
 	font-size: 64pt;
 	align-self: baseline;
 }
-#time-left {
+#secondary {
 	flex: 1;
+	justify-content: flex-end;
+	align-self: baseline;
+}
+#secondary-time {
 	font-size: 40pt;
-	text-align: right;
+	align-self: baseline;
+}
+#secondary-am-pm {
+	font-size: 28pt;
 	align-self: baseline;
 }
 
