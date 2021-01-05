@@ -2,12 +2,19 @@ body {
 	position: fixed;
 	left: 50%;
 	transform: translateX(-51%);
-	color: #a0a0a0;
 	background-color: #000;
 	font-family: Calibri, Helvetica, sans-serif;
 	user-select: none;
 	/* Hide body until dynamic elements load. */
 	visibility: hidden;
+}
+
+.blue {
+	color: #80b0d0;
+}
+
+.green {
+	color: #90d080;
 }
 
 .flex-container {
@@ -23,11 +30,23 @@ body {
 }
 .selectable:hover {
 	color: #000;
-	background-color: #ccc;
+	filter: brightness(150%);
+}
+.blue .selectable:hover {
+	background-color: #80b0d0;
+}
+.green .selectable:hover {
+	background-color: #90d080;
 }
 .selected {
 	color: #000;
-	background-color: #a0a0a0;
+	filter: brightness(130%);
+}
+.blue .selected {
+	background-color: #80b0d0;
+}
+.green .selected {
+	background-color: #90d080;
 }
 
 .fill {
@@ -164,6 +183,9 @@ button {
 a:link {
 	color: #d05050;
 }
-a:visited {
-	color: #a0a0a0;
+.blue a:visited {
+	color: #80b0d0;
+}
+.green a:visited {
+	color: #90d080;
 }

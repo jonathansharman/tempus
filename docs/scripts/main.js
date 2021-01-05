@@ -408,6 +408,8 @@ function setCountdown(value) {
 		left.h = 0;
 		left.m = 0;
 		left.s = 0;
+		// Set color theme.
+		document.body.className = "green";
 	} else {
 		// Update selectors.
 		clockMode.className = "selectable selected";
@@ -418,6 +420,8 @@ function setCountdown(value) {
 		// Reset alarm time.
 		alarm.h = null;
 		alarm.m = 0;
+		// Set color theme.
+		document.body.className = "blue";
 	}
 	// Remake hours table if necessary.
 	if (!military) {
